@@ -17,9 +17,12 @@ const container = require('./container');
 // adopting its eventual state; if the value was a promise, that object becomes the result of the call
 // to Promise.resolve; otherwise the returned promise will be fulfilled with the value.
 
-container.resolve(function(users) {
-  // mongoose.Promise = global.Promise;
-  // mongoose.connect('mongodb://localhost/SocioFuss', { useMongoClient: true });
+container.resolve(function(users, _) {
+  mongoose.Promise = global.Promise;
+  mongoose.connect(
+    'mongodb://Prakhar:hexadecimalA001@ds111618.mlab.com:11618/sociofuss'
+    // { useMongoClient: true }
+  );
 
   const app = SetupExpress();
 
@@ -39,6 +42,10 @@ container.resolve(function(users) {
   }
 
   function ConfigureExpress(app) {
+    require('./passport/passport-local');
+    require('./passport/passport-facebook');
+    require('./passport/passport-google');
+
     app.use(express.static('public')); // now express app can access any static files in the structure unded public
     app.use(cookieParser());
     app.set('view engine', 'ejs');
@@ -47,14 +54,16 @@ container.resolve(function(users) {
     app.use(validator());
     app.use(
       session({
-        secret: 'thisisasecretkey',
+        secret: 'hsiuvhlksjvnalsvflsjkbfabvah',
         resave: true,
-        saveInitialized: true
-        // store: new MongoStore({ mongooseConnection: mongoose.connection })
+        saveInitialized: true,
+        store: new MongoStore({ mongooseConnection: mongoose.connection })
       })
     );
     app.use(flash());
     app.use(passport.initialize());
     app.use(passport.session());
+
+    app.locals._ = _;
   }
 });

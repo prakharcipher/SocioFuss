@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/prakharcipher/SocioFuss#readme",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.2",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^2.0.1",
@@ -30,6 +31,8 @@
     "lodash": "^4.17.4",
     "mongoose": "^5.0.1",
     "passport": "^0.4.0",
+    "passport-facebook": "^2.1.1",
+    "passport-google-oauth": "^1.0.0",
     "passport-local": "^1.0.0"
   }
 }
