@@ -3,7 +3,13 @@ const path = require('path');
 
 const container = dependable.container();
 
-const simpleDependencies = [['_', 'lodash'], ['passport', 'passport']];
+const simpleDependencies = [
+  ['_', 'lodash'],
+  ['passport', 'passport'],
+  ['formidable', 'formidable'],
+  ['Club', './models/clubs'],
+  ['aws', './helpers/AWSUpload']
+];
 
 simpleDependencies.forEach(function(val) {
   container.register(val[0], function() {

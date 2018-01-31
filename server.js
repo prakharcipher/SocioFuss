@@ -17,7 +17,7 @@ const container = require('./container');
 // adopting its eventual state; if the value was a promise, that object becomes the result of the call
 // to Promise.resolve; otherwise the returned promise will be fulfilled with the value.
 
-container.resolve(function(users, _) {
+container.resolve(function(users, _, admin) {
   mongoose.Promise = global.Promise;
   mongoose.connect(
     'mongodb://Prakhar:hexadecimalA001@ds111618.mlab.com:11618/sociofuss'
@@ -37,6 +37,7 @@ container.resolve(function(users, _) {
     // setting up router
     const router = require('express-promise-router')();
     users.SetRouting(router);
+    admin.SetRouting(router);
 
     app.use(router);
   }
